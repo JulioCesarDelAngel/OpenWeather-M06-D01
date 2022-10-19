@@ -93,8 +93,7 @@ function dashBoard(city,data){
 
     for (i=0; i < 6; i++){
         var date =moment.unix(data[i].dt).format("DD/MM/YYYY");
-
-        $("#title-"+i).text(city + " (" +date + ")");
+        $("#title-"+i).text( i==0?  city +" "+date :date  );
         $("#ico-"+i).attr("src",urlIcon + data[i].weather[0].icon + ".png");
         $("#temp-"+i).text("Temp: "+ data[i].temp.day + " °F");
         $("#wind-"+i).text("Wind: " + data[i].wind_speed + " MHP");
