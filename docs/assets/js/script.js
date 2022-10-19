@@ -6,7 +6,31 @@ var urlSearchCity   = "http://api.openweathermap.org/geo/1.0/direct?appid=658ef2
 var urlSearchData   = "https://openweathermap.org/data/2.5/onecall?appid=439d4b804bc8187953eb36d2a8c26a02&units=imperial";
 var urlIcon         = "http://openweathermap.org/img/w/" //*.png
 
-//http://openweathermap.org/img/w/04d.png
+
+function toastMsg(message){
+    var divmessagebox = document.getElementById("snackbar");
+        divmessagebox.textContent =message;
+        divmessagebox.className = "show";
+        setTimeout( function () {divmessagebox.className = divmessagebox.className.replace("show","");}, 2000  
+    );
+    return;
+  }
+
+
+
+var historyBtnFn = async function (event){
+    debugger;
+    if (event.target.matches("button")===true){
+        var idx = event.target.getAttribute('data-index');
+        if (idx !== null){
+            var dataWeather = await getData(localHistoryList[idx].latitude, localHistoryList[idx].longitude);
+            if (dataWeather !== null && dataWeather.daily.length > 0 ) {
+                dashBoard(localHistoryList[idx].cityId, dataWeather.daily);
+            }
+        }
+    }
+};
+
 function dataCrud(actionType,city, lat, lon){
     if (actionType==="R"){
         var getLocalStorage = JSON.parse(localStorage.getItem("HistoryList"));
@@ -28,7 +52,6 @@ function removeElement(element){
     while ( (element.firstChild != null) && element.firstChild){
         element.removeChild(element.firstChild);
     }
-
     return;
 }
 
@@ -40,7 +63,7 @@ function refreshList(){
         btn.id = "button-"+i;
         btn.setAttribute("data-index", i)
         btn.type = "button";
-        btn.setAttribute("class", "btn btn-primary btn btn-block");
+        btn.setAttribute("class", "btn btn-secondary btn btn-block");
         btn.setAttribute("style","margin-top: 10px;");
         btn.textContent = localHistoryList[i].cityId;
         historyContent.appendChild(btn);
@@ -64,36 +87,20 @@ async function getData(latitude, longitude){
     var data = await response.json();
     return data;
 
-    
-
 }
 
 function dashBoard(city,data){
-    debugger;
 
-    for (i=0; i < 5; i++){
-        console.log ("----------" + i);
-        console.log(data[i].dt);        
-        var date =moment.unix(data[1].dt).format("DD/MM/YYYY");
-        console.log(date);
-        console.log(data[i].weather[0].icon); 
-        console.log(data[i].temp.day); 
-        console.log(data[i].wind_speed); 
-        console.log(data[i].humidity); 
-        console.log(data[i].uvi); 
-        console.log ("----------");
+    for (i=0; i < 6; i++){
+        var date =moment.unix(data[i].dt).format("DD/MM/YYYY");
 
-        if (i === 0) {
-            $("#title-"+i).text(city + " (" +date + ")");
-            $("#ico-"+i).attr("src",urlIcon + data[i].weather[0].icon + ".png");
-            $("#temp-"+i).text("Temp: "+ data[i].temp.day + " °F");
-            $("#wind-"+i).text("Wind: " + data[i].wind_speed + " MHP");
-            $("#humi-"+i).text("Humidity: " + data[i].humidity +" %");
-        }
+        $("#title-"+i).text(city + " (" +date + ")");
+        $("#ico-"+i).attr("src",urlIcon + data[i].weather[0].icon + ".png");
+        $("#temp-"+i).text("Temp: "+ data[i].temp.day + " °F");
+        $("#wind-"+i).text("Wind: " + data[i].wind_speed + " MHP");
+        $("#humi-"+i).text("Humidity: " + data[i].humidity +" %");
 
     }
-
-    debugger
     return;
 }
 
@@ -110,28 +117,26 @@ async function search(event){
                     dataCrud("C", dataCity[0].name.trim(), dataCity[0].lat, dataCity[0].lon);    
                     refreshList();
                     dashBoard(dataCity[0].name.trim(), dataWeather.daily);
+                    searchTxt.value="";
                 }
-                
-                /*
-                dataWeather.current.weather[0].icon
-
-                */
-
-
+                else{
+                    toastMsg("No se encontraron datos. Intente mas tarde.");
+                }
             }
             else{
-                //error no se encontro la ciudad.
+                toastMsg("No se encontro la ciudad.  Intente mas tarde.");
             }
         }
         else{
             //error debe capturar una ciudad.
+            toastMsg("Debe capturar la ciudad.");
         }
     }
 }
 
 
-
 searchBtn.addEventListener("click",search);
+historyContent.addEventListener("click",historyBtnFn)
 
 function init(){
     dataCrud("R");
@@ -139,12 +144,3 @@ function init(){
 }
 
 init();
-
-/*
-data.cod  200 /404
-data.main.temp
-data.wind.speed
-data.main.humidity
-uv_index NA
-data.weather[0].icon
-*/
