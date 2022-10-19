@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <title>Weather Dashboard</title>
+    </head>
+    <body>
+        <header class="jumbotron">
+            <h2>Weather Dashboard</h2>                
+        </header>
+        <div id="rowContainer" class=" row" style="background-color: red;">
+
+            <div id="search" class="card col-3 align-self-start scrollable" style="width: 18rem;">
+                <div class="input-group" >
+                    <input id="searchTxt" type="text" class="form-control " placeholder="Capture su ciudad" >
+                    <button id="searchBtn" type="button" class="btn btn-primary btn btn-block">Buscar</button>
+                </div>
+                <hr>
+                <div id="history" class="btn-group-vertical">
+                    <button type="button" class="btn btn-primary btn btn-block" style="margin-top: 10px;">Block level button</button>
+                    <button type="button" class="btn btn-primary btn btn-block" style="margin-top: 10px;">Block level button</button>
+                </div>
+            </div>       
+
+            <div id="cards" class="col-9" style="background-color: green;">
+                <div id="day0" class="card-body border-bottom border-dark" >
+                    <div class="row">
+                    <h5 id="title-0" class="card-title">00/00/0000</h5>
+                    <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">
+                    </div>
+                    <p id = "temp-0" class="card-text">Temp: 00°</p>
+                    <p id = "wind-0" class="card-text">Wind: 0.00 MHP</p>
+                    <p id = "humi-0" class="card-text">Humidity: 00%</p>
+                </div>
+
+                <h4>5-Day Forecast</h4>
+                  <div id="week" class="row">
+                    <div class="card-body col-2 border border-dark" >
+                        <h5 class="card-title">00/00/0000</h5>
+                        <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">                        
+                        <p class="card-text">Temp: 00°</p>
+                        <p class="card-text">Wind: 0.00 MHP</p>
+                        <p class="card-text">Humidity: 00%</p>
+                    </div>
+                    <div class="card-body col-2 border border-dark" >
+                        <h5 class="card-title">00/00/0000</h5>
+                        <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">                        
+                        <p class="card-text">Temp: 00°</p>
+                        <p class="card-text">Wind: 0.00 MHP</p>
+                        <p class="card-text">Humidity: 00%</p>
+                    </div>
+                    <div class="card-body col-2 border border-dark" >
+                        <h5 class="card-title">00/00/0000</h5>
+                        <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">
+                        <p class="card-text">Temp: 00°</p>
+                        <p class="card-text">Wind: 0.00 MHP</p>
+                        <p class="card-text">Humidity: 00%</p>
+                    </div>
+                    <div class="card-body col-2 border border-dark" >
+                        <h5 class="card-title">00/00/0000</h5>
+                        <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">
+                        <p class="card-text">Temp: 00°</p>
+                        <p class="card-text">Wind: 0.00 MHP</p>
+                        <p class="card-text">Humidity: 00%</p>
+                    </div>
+                    <div class="card-body col-2 border border-dark" >
+                        <h5 class="card-title">00/00/0000</h5>
+                        <img id = "ico-0" src="http://openweathermap.org/img/w/04d.png" alt="icon">
+                        <p class="card-text">Temp: 00°</p>
+                        <p class="card-text">Wind: 0.00 MHP</p>
+                        <p class="card-text">Humidity: 00%</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+        <script src="./assets/js/script.js"></script>
+    </body>
+</html>
