@@ -2,9 +2,9 @@ var historyContent  = document.getElementById("history");
 var searchBtn       = document.getElementById("searchBtn");
 var searchTxt       = document.getElementById("searchTxt");
 var localHistoryList= [];
-var urlSearchCity   = "http://api.openweathermap.org/geo/1.0/direct?appid=658ef29a4cb4df2e55ce7d1051dde05b&limit=1&q=";
+var urlSearchCity   = "https://api.openweathermap.org/geo/1.0/direct?appid=658ef29a4cb4df2e55ce7d1051dde05b&limit=1&q=";
 var urlSearchData   = "https://openweathermap.org/data/2.5/onecall?appid=439d4b804bc8187953eb36d2a8c26a02&units=imperial";
-var urlIcon         = "http://openweathermap.org/img/w/" //*.png
+var urlIcon         = "https://openweathermap.org/img/w/" //*.png
 
 
 function toastMsg(message){
